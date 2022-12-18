@@ -4,9 +4,9 @@ def SwitchTask ():
     taskNum = int(input("Введите номер задачи из домашней работы: "))
     taskNumber = {
         2: TaskTwo(),
-        # taskNum == 4: TaskFour(),
-        # taskNum == 6: TaskSix(),
-        # taskNum == 8: TaskEight()
+        4: TaskFour(),
+        # 6: TaskSix(),
+        # 8: TaskEight()
     }
     taskNumber.get(taskNum, "Нет такой задачи")
 
@@ -30,5 +30,25 @@ def SumOfDigit(num):
         num //= 10
     return sum
 
+# Задача 4
+# Петя, Катя и Сережа делают из бумаги журавликов. 
+# Вместе они сделали S журавликов. 
+# Сколько журавликов сделал каждый ребенок, если известно, 
+# что Петя и Сережа сделали одинаковое количество журавликов, 
+# а Катя сделала в два раза больше журавликов, чем Петя и Сережа вместе?
+# Пример:
+# 6 -> 1 4 1
+# 24 -> 4 16 4
+# 60 -> 10 40 10
+
+def TaskFour():
+    countCrane = int(input("Введите количество журавликов: "))
+    if countCrane < 0:
+        countCrane *= -1
+    if countCrane % 6:
+        print("Задача не имеет целочисленного решения при данном количестве журавликов.")
+    else:
+        print(f"Петя: {countCrane//6}\nКатя: {countCrane//6*4}\nСережа: {countCrane//6}")
+
 # SwitchTask()
-TaskTwo ()
+TaskFour()

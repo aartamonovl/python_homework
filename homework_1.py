@@ -1,14 +1,18 @@
-
-
-def SwitchTask ():
+def SwitchTask():
     taskNum = int(input("Введите номер задачи из домашней работы: "))
-    taskNumber = {
-        2: TaskTwo(),
-        4: TaskFour(),
-        6: TaskSix(),
-        # 8: TaskEight()
-    }
-    taskNumber.get(taskNum, "Нет такой задачи")
+    while taskNum != 0:
+        if taskNum == 2:
+            TaskTwo()
+        elif taskNum == 4:
+            TaskFour()
+        elif taskNum == 6:
+            TaskSix()
+        elif taskNum == 8:
+            TaskEight()
+        else:
+            print("Задачи с таким номером не задавали. Введите правильный номер задачи.")
+        taskNum = int(input("Если все проведено, введите 0.\nВведите номер задачи из домашней работы: "))
+
 
 # Задача 2
 # Найдите сумму цифр трехзначного числа.
@@ -16,7 +20,7 @@ def SwitchTask ():
 # 123 -> 6 (1 + 2 + 3)
 # 100 -> 1 (1 + 0 + 0)
 
-def TaskTwo ():
+def TaskTwo():
     num = str(input("Ввдите трехзначное число: "))
     while num != "":
         if num[0] == '-':
@@ -99,5 +103,5 @@ def TaskEight():
             print("No")
         ready = str(input("Если хотите выйти, оставьте пустую строчку."))
 
-# SwitchTask()
-TaskEight()
+
+SwitchTask()

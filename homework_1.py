@@ -18,10 +18,14 @@ def SwitchTask ():
 
 def TaskTwo ():
     num = str(input("Ввдите трехзначное число: "))
-    if len(num) == 3:
-        print(f"Сумма цифр в числе: {SumOfDigit(int(num))}")
-    else:
-        print("Число не трёхзначное. Ввдедите правильное число.")
+    while num != "":
+        if num[0] == '-':
+            num = num[1:]
+        if len(num) == 3:
+            print(f"Сумма цифр в числе: {SumOfDigit(int(num))}")
+        else:
+            print("Число не трёхзначное. Ввдедите правильное число.")
+        num = str(input("Если хотите остановиться, оставьте поле пустым.\nВвдите следующее трехзначное число: "))
 
 def SumOfDigit(num):
     sum = 0
@@ -43,12 +47,36 @@ def SumOfDigit(num):
 
 def TaskFour():
     countCrane = int(input("Введите количество журавликов: "))
-    if countCrane < 0:
-        countCrane *= -1
-    if countCrane % 6:
-        print("Задача не имеет целочисленного решения при данном количестве журавликов.")
-    else:
-        print(f"Петя: {countCrane//6}\nКатя: {countCrane//6*4}\nСережа: {countCrane//6}")
+    while countCrane:
+        if countCrane < 0:
+            countCrane *= -1
+        if countCrane % 6:
+            print("Задача не имеет целочисленного решения при данном количестве журавликов.")
+        else:
+            print(f"Петя: {countCrane//6}\nКатя: {countCrane//6*4}\nСережа: {countCrane//6}")
+        countCrane = int(input("Если хотите остановиться, введите 0.\nВведите количество журавликов: "))
 
+# Задача 6
+# Вы пользуетесь общественным транспортом? Вероятно, вы расплачивались за проезд и получали билет с номером. 
+# Счастливым билетом называют такой билет с шестизначным номером, где сумма первых трех цифр равна сумме последних трех. 
+# Т.е. билет с номером 385916 – счастливый, т.к. 3+8+5=9+1+6. 
+# Вам требуется написать программу, которая проверяет счастливость билета.
+# Пример:
+# 385916 -> yes
+# 123456 -> no
+
+def TaskSix():
+    ticketNum = str(input("Введите номер билета: "))
+    while ticketNum != "":
+        if len(ticketNum) == 6:
+            ticketNum1 = int(ticketNum[:len(ticketNum)//2])
+            ticketNum2 = int(ticketNum[len(ticketNum)//2:])
+            if SumOfDigit(ticketNum1) == SumOfDigit(ticketNum2):
+                print("Yes")
+            else:
+                print("No")
+        else:
+            print("Такого номера билета не бывает. Попробуйте еще раз.")
+        ticketNum = str(input("Если хотите прекратить проверять билеты, оставьте поле пустым.\nВведите номер билета: "))
 # SwitchTask()
-TaskFour()
+TaskSix()

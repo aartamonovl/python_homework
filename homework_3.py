@@ -9,8 +9,6 @@ def SwitchTask():
             Task18()
         elif taskNum == 20:
             Task20()
-        elif taskNum == 22:
-            Task22()
         else:
             print("Задачи с таким номером не задавали. Введите правильный номер задачи.")
         taskNum = int(input("Если все проведено, введите 0.\nВведите номер задачи из домашней работы: "))
@@ -32,13 +30,12 @@ def Task16():
         intArray = []
         count = 0
         for i in range(size):
-            intArray.append(random.randint(1, 5))
+            intArray.append(random.randint(1, int(size/2)))
             if num == intArray[i]:
                 count += 1
         print(intArray)
         print(count)
         size = int(input("Чтобы продолжить, введите размер нового массива.\nДля остановки введите 0. "))
-Task16()
 
 # Задача 18:
 # Требуется найти в массиве A[1..N] самый близкий по величине элемент к заданному числу X.
@@ -50,8 +47,32 @@ Task16()
 # 1 2 1 8 9 6 5 4 3 4
 # Вывод: 6
 
-
-
+def Task18():
+    size = int(input("Введите размер массива: "))
+    while size != 0:
+        intArray = []
+        for i in range(size):
+            intArray.append(random.randint(1, 10))
+        print(intArray)
+        num = int(input("Введите число, к которому нужно найти ближайшее: "))
+        intDiff = []
+        minDiff = 0
+        flag = True
+        for i in range(len(intArray)):
+            intDiff.append(abs(num - intArray[i]))
+            if intDiff[i] != 0 and flag:
+                minDiff = i
+                flag = False
+        print(intDiff)
+        for i in range(minDiff + 1, len(intDiff)):
+            if intDiff[i] != 0:
+                if intDiff[i] < intDiff[minDiff]:
+                    minDiff = i
+                elif intDiff[minDiff] == intDiff[i]:
+                    if intArray[i] < num:
+                        minDiff = i
+        print(intArray[minDiff])
+        size = int(input("Чтобы продолжить, введите размер нового массива.\nДля остановки введите 0. "))
 
 # Задача 20:
 # В настольной игре Скрабл (Scrabble) каждая буква имеет определенную ценность.
@@ -71,11 +92,49 @@ Task16()
 # Ж, З, Х, Ц, Ч – 5 очков;
 # Ш, Э, Ю – 8 очков;
 # Ф, Щ, Ъ – 10 очков.
-
-
-
-
 # Напишите программу, которая вычисляет стоимость введенного пользователем слова.
 # Будем считать, что на вход подается только одно слово, которое содержит либо только английские, либо только русские буквы.
 # Ввод: ноутбук
 # Вывод: 12
+
+def Task20():
+    dictionEN = {
+        "AEIOULNSTR": 1,
+        "DG": 2,
+        "BCMP": 3,
+        "FHVWY": 4,
+        "K": 5,
+        "JX": 8,
+        "QZ": 10
+    }
+    dictionRU = {
+        "АВЕИНОРСТ": 1,
+        "ДКЛМПУ": 2,
+        "БГЁЬЯ": 3,
+        "ЙЫ": 4,
+        "ЖЗХЦЧ": 5,
+        "ШЭЮ": 8,
+        "ФЩЪ": 10
+    }
+    word = str(input("Введите слово. Поле не должно быть пустым.\n"))
+    while word != "":
+        sum = 0
+        ru = False
+        en = False
+        for i in word:
+            for key in dictionRU:
+                if i.upper() in key:
+                    sum += dictionRU[key]
+                    ru = True
+            for key in dictionEN:
+                if i.upper() in key:
+                    sum += dictionEN[key]
+                    en = True
+            if ru and en:
+                print("Слово должно состоять из букв одного языка.")
+                break
+        if not (ru and en):
+            print(sum)
+        word = str(input("Введите новое слово. Чтобы закончить, оставьте поле пустым.\n"))
+
+SwitchTask()
